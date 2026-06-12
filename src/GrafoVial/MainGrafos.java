@@ -1,20 +1,36 @@
 package GrafoVial;
 
 public class MainGrafos {
+
+    public static Interseccion A =
+            new Interseccion("Av la plata y Av independencia");
+
+    public static Interseccion B =
+            new Interseccion("Muñis y Av independencia");
+
+    public static Interseccion C =
+            new Interseccion("Jose marmol y Av independencia");
+
+    public static Interseccion D =
+            new Interseccion("Av la plata y Estados Unidos");
+
+    public static Interseccion E =
+            new Interseccion("Muñis y Estados Unidos");
+
+    public static Interseccion F =
+            new Interseccion("Jose Marmol y Estados Unidos");
+
+    public static Interseccion G =
+            new Interseccion("Av la plata y Carlos Calvo");
+
+    public static Interseccion H =
+            new Interseccion("Muñis y Carlos Calvo");
+
+    public static Interseccion I =
+            new Interseccion("Jose Marmol y Carlos Calvo");
+
     static void main() {
         GrafoVial grafo = new GrafoVial(10);
-
-        Interseccion A = new Interseccion("Av la plata y Av independencia");
-        Interseccion B = new Interseccion("Muñis y Av independencia");
-        Interseccion C = new Interseccion("jose marmol y Av independencia");
-        Interseccion D = new Interseccion("Av la plata y Estados unidos");
-        Interseccion E = new Interseccion("Muñis y Estados Unidos");
-        Interseccion F = new Interseccion("Jose Marmol y Estados Unidos");
-        Interseccion G = new Interseccion("Av la plata  y Carlos calvo");
-        Interseccion H = new Interseccion("Muñis y Carlos Calvo");
-        Interseccion I = new Interseccion("Joser marmol y carlos calvo");
-
-
 
         grafo.agregarInterseccion(A);
         grafo.agregarInterseccion(B);

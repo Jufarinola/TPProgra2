@@ -1,9 +1,13 @@
 package ArbolCiudad;
 
+import GrafoVial.MainGrafos;
+import GrafoVial.Interseccion;
+
 public class MainArbol {
     static void main() {
         Arbol arbol = new Arbol();
 
+        //Crear raiz y zonas
         NodoArbol BuenosAires = new NodoArbol("Buenos Aires");
         NodoArbol ZonaNorte = new NodoArbol("Zona Norte");
         NodoArbol ZonaSur = new NodoArbol("Zona Sur");
@@ -16,18 +20,76 @@ public class MainArbol {
         arbol.agregarHijo(BuenosAires, ZonaSur);
         arbol.agregarHijo(BuenosAires, CapitalFederal);
 
-        NodoArbol palermo = new NodoArbol("Palermo");
-        NodoArbol Avellaneda = new NodoArbol("Avellaneda");
-        arbol.agregarHijo(CapitalFederal, palermo);
-        arbol.agregarHijo(ZonaSur,Avellaneda);
+        //Crear barrio
+        NodoArbol Boedo = new NodoArbol("Boedo");
+        arbol.agregarHijo(CapitalFederal, Boedo);
 
+        //Crear manzanas
+        Manzana m1 = new Manzana(
+                "Manzana 1",
+                MainGrafos.A,
+                MainGrafos.B,
+                MainGrafos.D,
+                MainGrafos.E
+        );
+
+        Manzana m2 = new Manzana(
+                "Manzana 2",
+                MainGrafos.B,
+                MainGrafos.C,
+                MainGrafos.E,
+                MainGrafos.F
+        );
+
+        Manzana m3 = new Manzana(
+                "Manzana 3",
+                MainGrafos.D,
+                MainGrafos.E,
+                MainGrafos.G,
+                MainGrafos.H
+        );
+
+        Manzana m4 = new Manzana(
+                "Manzana 4",
+                MainGrafos.E,
+                MainGrafos.F,
+                MainGrafos.H,
+                MainGrafos.I
+        );
+
+
+        NodoArbol nodoM1 = new NodoArbol(m1);
+        NodoArbol nodoM2 = new NodoArbol(m2);
+
+        NodoArbol nodoM3 = new NodoArbol(m3);
+        NodoArbol nodoM4 = new NodoArbol(m4);
+
+        //Agregar manzana a barrio
+        arbol.agregarHijo(Boedo,nodoM1);
+        arbol.agregarHijo(Boedo,nodoM2);
+        arbol.agregarHijo(Boedo,nodoM3);
+        arbol.agregarHijo(Boedo,nodoM4);
+
+
+        //Mostrar arbol
         arbol.mostrarArbol();
+        System.out.println();
+
+        //Mostrar manzana
+        m1.mostrarManzana();
+        System.out.println();
+
+        //Buscar barrio dentro del arbol
+        arbol.buscarBarrio("boedo");
 
 
-        boolean b = arbol.buscarBarrio("Avellaneda");
-        System.out.println(b);
+        //Mostrar barrios de zonas
         arbol.mostrarBarriosDeZona("Capital Federal");
-        arbol.eliminarBarrio("Palermo","Capital Federal");
+        System.out.println();
+
+        //Eliminar un barrio
+        arbol.eliminarBarrio("Boedo","Capital Federal");
+        System.out.println();
         arbol.mostrarArbol();
 
     }
