@@ -73,36 +73,5 @@ public class MainGrafos {
 
         grafo.dijkstraTiempo(A, I);
 
-        Diccionario dispositivos = new Diccionario();
-
-        Camara cam1 = new Camara("CAM001", i1);
-        Camara cam2 = new Camara("CAM002", i2);
-
-        Semaforo sem1 = new Semaforo("SEM001", i3);
-        Semaforo sem2 = new Semaforo("SEM002", i4);
-
-        dispositivos.agregar(cam1);
-        dispositivos.agregar(cam2);
-        dispositivos.agregar(sem1);
-        dispositivos.agregar(sem2);
-
-        cam1.activar();
-        cam2.desactivar();
-
-        sem1.activar();
-        sem1.cambiarAVerde();
-
-        sem2.activar();
-        sem2.cambiarARojo();
-
-        cam1.consultarEstado();
-        cam2.consultarEstado();
-
-        sem1.consultarEstado();
-        sem2.consultarEstado();
-
-        dispositivos.buscar("CAM001");
-
-        dispositivos.mostrar();
     }
 }

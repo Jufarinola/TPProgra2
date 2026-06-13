@@ -1,17 +1,16 @@
 package Dispositivos;
 
 import GrafoVial.Interseccion;
+import GrafoVial.MainGrafos;
 
 public class MainDispositivos {
     public static void main(String[] args) {
 
-        // Crear intersecciones
-        Interseccion A = new Interseccion("A");
-        Interseccion B = new Interseccion("B");
+
 
         // Crear dispositivos
-        Semaforo s1 = new Semaforo("S001", A);
-        Camara c1 = new Camara("C001", B);
+        Semaforo s1 = new Semaforo("S001", MainGrafos.A);
+        Camara c1 = new Camara("C001", MainGrafos.B);
 
         // Activar dispositivos
         s1.activar();
