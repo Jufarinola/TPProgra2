@@ -12,3 +12,5 @@ Funcionalidades:
   -Registrar, buscar y consultar el estado de los dispositivos.
   -Controlar el estado de los semáforos (rojo o verde).
 Actividades realizadas: Juan Pablo Farinola GrafoVial - Eric Song Dispositivos - Felipe Procyk ArbolCiudad
+
+Link de repositorio: https://github.com/Jufarinola/TPProgra2.git
