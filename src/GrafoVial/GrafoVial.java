@@ -1,5 +1,6 @@
 package GrafoVial;
 
+import Accidentes.GestorAccidentes;
 import javax.print.DocFlavor;
 
 public class GrafoVial {
@@ -7,12 +8,14 @@ public class GrafoVial {
     Calle[][] matriz;
     int cantidad;
     int capacidad;
+    public GestorAccidentes gestorAccidentes;
 
     public GrafoVial(int capacidad){
         this.capacidad = capacidad;
         this.intersecciones = new Interseccion[capacidad];
         this.matriz = new Calle[capacidad][capacidad];
         this.cantidad = 0;
+        this.gestorAccidentes = new GestorAccidentes(capacidad);
     }
 
     public void agregarInterseccion(Interseccion interseccion){
@@ -117,14 +120,16 @@ public class GrafoVial {
         return obtenerIndice(interseccion) != -1;
     }
 
-    public double calcularTiempo(Calle calle){
+    public double calcularTiempo(Calle calle, int posOrigen, int posDestino){
         double distanciaKm = calle.distancia / 1000.0;
 
         double tiempoHoras = distanciaKm / calle.limiteVelocidad;
 
         double tiempoMinutos = tiempoHoras * 60;
+        
+        double demoraExtra = gestorAccidentes.obtenerDemoraporAccidente(posOrigen, posDestino);
 
-        return tiempoMinutos;
+        return tiempoMinutos + demoraExtra;
     }
 
     public int buscarMenorTiempo(double[] tiempo, boolean[] visitado){
@@ -180,7 +185,7 @@ public class GrafoVial {
 
                     Calle calle = matriz[actual][vecino];
 
-                    double nuevoTiempo = tiempo[actual] + calcularTiempo(calle);
+                    double nuevoTiempo = tiempo[actual] + calcularTiempo(calle, actual, vecino);
 
                     if(nuevoTiempo < tiempo[vecino]){
                         tiempo[vecino] = nuevoTiempo;
@@ -199,6 +204,24 @@ public class GrafoVial {
         System.out.print("Camino: ");
         mostrarCamino(anterior, posDestino);
         System.out.println();
+    }
+
+    public void reportarAccidente(Calle calle, String gravedad) {
+        int posOrigen = obtenerIndice(calle.origen);
+        int posDestino = obtenerIndice(calle.destino);
+        if (posOrigen != -1 && posDestino != -1 && existeCalle(calle)) {
+            gestorAccidentes.reportarAccidente(posOrigen, posDestino, gravedad);
+        } else {
+            System.out.println("Error: No se encontró la calle para reportar el accidente.");
+        }
+    }
+
+    public void resolverAccidente(Calle calle) {
+        int posOrigen = obtenerIndice(calle.origen);
+        int posDestino = obtenerIndice(calle.destino);
+        if (posOrigen != -1 && posDestino != -1) {
+            gestorAccidentes.resolverAccidente(posOrigen, posDestino);
+        }
     }
 
     public void mostrarCamino(int[] anterior, int destino){

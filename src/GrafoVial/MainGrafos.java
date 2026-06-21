@@ -29,7 +29,7 @@ public class MainGrafos {
     public static Interseccion I =
             new Interseccion("Jose Marmol y Carlos Calvo");
 
-    static void main() {
+    public static void main(String[] args) {
         GrafoVial grafo = new GrafoVial(10);
 
         grafo.agregarInterseccion(A);
@@ -71,6 +71,17 @@ public class MainGrafos {
 
         grafo.mostrarMatriz();
 
+        System.out.println("--- RUTA NORMAL ---");
+        grafo.dijkstraTiempo(A, I);
+
+        System.out.println("\n--- OCURRE UN ACCIDENTE EN AV LA PLATA ---");
+        grafo.reportarAccidente(c3, "Grave"); 
+
+        System.out.println("\n--- RUTA CON ACCIDENTE ---");
+        grafo.dijkstraTiempo(A, I);
+
+        System.out.println("\n--- ACCIDENTE RESUELTO ---");
+        grafo.resolverAccidente(c3);
         grafo.dijkstraTiempo(A, I);
 
     }
