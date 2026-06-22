@@ -9,7 +9,6 @@ public class Calle {
 
     int distancia;
     int limiteVelocidad;
-    String nivelTrafico;
 
     public Calle(String nombre, int altura,
                  Interseccion origen, Interseccion destino,
