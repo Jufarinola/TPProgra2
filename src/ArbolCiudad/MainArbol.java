@@ -1,6 +1,6 @@
 package ArbolCiudad;
 
-import GrafoVial.MainGrafos;
+import Main.MainGrafos;
 
 
 public class MainArbol {

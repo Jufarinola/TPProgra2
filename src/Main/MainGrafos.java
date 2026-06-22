@@ -1,8 +1,8 @@
 package Main;
 
-import GrafoVial.Calle;
 import GrafoVial.GrafoVial;
 import GrafoVial.Interseccion;
+import GrafoVial.Calle;
 
 public class MainGrafos {
 
@@ -79,7 +79,7 @@ public class MainGrafos {
         grafo.dijkstraTiempo(A, I);
 
         System.out.println("\n--- OCURRE UN ACCIDENTE EN AV LA PLATA ---");
-        grafo.reportarAccidente(c3, "Grave");
+        grafo.reportarAccidente(c3, "Grave"); 
 
         System.out.println("\n--- RUTA CON ACCIDENTE ---");
         grafo.dijkstraTiempo(A, I);
@@ -87,6 +87,34 @@ public class MainGrafos {
         System.out.println("\n--- ACCIDENTE RESUELTO ---");
         grafo.resolverAccidente(c3);
         grafo.dijkstraTiempo(A, I);
+        System.out.println("\n==================================");
+        System.out.println("--- SIMULACIÓN DE FLUJO VEHICULAR ---");
+        System.out.println("==================================");
+        
+        Dispositivos.Semaforo semaforoA = new Dispositivos.Semaforo("SEM-A", A);
+        
+        System.out.println("\n--- LLEGADA DE VEHÍCULOS A LA INTERSECCIÓN A ---");
+        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-1"));
+        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-2"));
+        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-3"));
+
+        System.out.println("\n--- SEMÁFORO EN ROJO ---");
+        semaforoA.liberarTrafico();
+
+        System.out.println("\n--- SEMÁFORO EN VERDE ---");
+        semaforoA.cambiarAVerde();
+        
+        semaforoA.liberarTrafico(); // Sale AUTO-1
+        semaforoA.liberarTrafico(); // Sale AUTO-2
+        
+        System.out.println("\n--- SEMÁFORO VUELVE A ROJO ---");
+        semaforoA.cambiarARojo();
+        semaforoA.liberarTrafico(); // Rebota AUTO-3
+        
+        System.out.println("\n--- SEMÁFORO VUELVE A VERDE ---");
+        semaforoA.cambiarAVerde();
+        semaforoA.liberarTrafico(); // Sale AUTO-3
+        semaforoA.liberarTrafico(); // Vacío
 
     }
 }

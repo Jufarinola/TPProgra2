@@ -1,7 +1,6 @@
 package Dispositivos;
 
-import GrafoVial.Interseccion;
-import GrafoVial.MainGrafos;
+import Main.MainGrafos;
 
 public class MainDispositivos {
     public static void main(String[] args) {
