@@ -1,9 +1,11 @@
 package GrafoVial;
 
 import Accidentes.GestorAccidentes;
+import Interfaces.IGrafoVial;
+
 import javax.print.DocFlavor;
 
-public class GrafoVial {
+public class GrafoVial implements IGrafoVial {
     Interseccion[] intersecciones;
     Calle[][] matriz;
     int cantidad;

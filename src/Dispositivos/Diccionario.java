@@ -1,12 +1,17 @@
 package Dispositivos;
 
-public class Diccionario {
+
+import Interfaces.IDiccionario;
+import Interfaces.IDispositivo;
+
+public class Diccionario implements IDiccionario {
 
     public NodoDispositivo primero;
 
     public Diccionario() {
         primero = null;
     }
+
 
     public void agregar(Dispositivo dispositivo) {
 
@@ -43,6 +48,7 @@ public class Diccionario {
 
         return null;
     }
+
 
     public void mostrar() {
 

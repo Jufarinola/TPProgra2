@@ -1,6 +1,8 @@
 package ArbolCiudad;
 
-public class NodoArbol {
+import Interfaces.INodoArbol;
+
+public class NodoArbol implements INodoArbol {
     String nombre;
 
     Manzana manzana;
@@ -20,5 +22,10 @@ public class NodoArbol {
         this.manzana = manzana;
         this.primerHijo = null;
         this.siguienteHermano = null;
+    }
+
+    @Override
+    public void mostrarNodo(){
+        System.out.println(nombre);
     }
 }

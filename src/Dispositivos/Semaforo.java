@@ -1,8 +1,9 @@
 package Dispositivos;
 
 import GrafoVial.Interseccion;
+import Interfaces.ISemaforo;
 
-public class Semaforo extends Dispositivo {
+public class Semaforo extends Dispositivo implements ISemaforo {
 
     public String color;
 

@@ -1,9 +1,10 @@
 package Accidentes;
 
-public class GestorAccidentes {
+import Interfaces.IGestorAccidentes;
+
+public class GestorAccidentes implements IGestorAccidentes {
     private Accidente[][] matrizAccidentes;
     private int cantidad;
-
 
     public GestorAccidentes(int cantidad) {
         this.cantidad = cantidad;
@@ -22,7 +23,7 @@ public class GestorAccidentes {
 
     public void reportarAccidente(int posOrigen, int posDestino, String gravedad){
         matrizAccidentes[posOrigen][posDestino] = new Accidente(gravedad);
-        System.out.println("Accidente (" + gravedad + ") registrado el: " + matrizAccidentes[posOrigen][posDestino].fechahora);
+        matrizAccidentes[posOrigen][posDestino].mostrarAccidente();
     }
 
     public void resolverAccidente(int posOrigen, int posDestino) {

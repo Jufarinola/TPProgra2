@@ -1,8 +1,9 @@
 package ArbolCiudad;
 
 import GrafoVial.Interseccion;
+import Interfaces.IManzana;
 
-public class Manzana {
+public class Manzana implements IManzana {
     String nombre;
 
     Interseccion esquina1;
@@ -23,6 +24,7 @@ public class Manzana {
         this.esquina4 = esquina4;
     }
 
+    @Override
     public void mostrarManzana() {
 
         System.out.println("Manzana: " + nombre);

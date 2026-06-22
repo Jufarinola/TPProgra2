@@ -1,8 +1,11 @@
 package ArbolCiudad;
 
+
+import Interfaces.IArbol;
+
 import java.security.PublicKey;
 
-public class Arbol {
+public class Arbol implements IArbol {
     private NodoArbol raiz;
     private int cant;  //HOLA!!
 
@@ -11,6 +14,7 @@ public class Arbol {
         cant=0;
     }
 
+    @Override
     public void agregarRaiz(NodoArbol nuevo){
         if(raiz == null){
             raiz = nuevo;
@@ -20,6 +24,7 @@ public class Arbol {
         }
     }
 
+    @Override
     public void agregarHijo(NodoArbol padre, NodoArbol nuevo){
         if(padre == null){
             System.out.println("El padre no existe");
@@ -41,6 +46,7 @@ public class Arbol {
         cant++;
     }
 
+    @Override
     public NodoArbol buscarZona(String nombre){
         if(raiz == null){
             return null;
@@ -59,10 +65,12 @@ public class Arbol {
         return null;
     }
 
+    @Override
     public boolean existeZona(String nombre){
         return buscarZona(nombre) != null;
     }
 
+    @Override
     public boolean buscarBarrio(String nombre){
         if(raiz == null){
             return false;
@@ -88,6 +96,7 @@ public class Arbol {
         return false;
     }
 
+    @Override
     public void mostrarBarriosDeZona(String nombre){
         NodoArbol zona = buscarZona(nombre);
 
@@ -109,6 +118,7 @@ public class Arbol {
         }
     }
 
+    @Override
     public void eliminarBarrio(String nombreBarrio, String nombreZona){
         NodoArbol zona = buscarZona(nombreZona);
 
@@ -141,6 +151,7 @@ public class Arbol {
         System.out.println("El barrio ingresado no existe en esa zona");
     }
 
+    @Override
     public void mostrarArbol() {
 
         if (raiz == null) {
