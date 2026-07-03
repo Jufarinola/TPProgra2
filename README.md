@@ -11,6 +11,6 @@ Funcionalidades:
   -Gestionar dispositivos urbanos (semáforos y cámaras).
   -Registrar, buscar y consultar el estado de los dispositivos.
   -Controlar el estado de los semáforos (rojo o verde).
-Actividades realizadas: Juan Pablo Farinola GrafoVial - Eric Song Dispositivos - Felipe Procyk ArbolCiudad
+Actividades realizadas: Juan Pablo Farinola GrafoVial - Eric Song Dispositivos, ArbolCiudad - Felipe Procyk ArbolCiudad, Dispositivos
 
 Link de repositorio: https://github.com/Jufarinola/TPProgra2.git
