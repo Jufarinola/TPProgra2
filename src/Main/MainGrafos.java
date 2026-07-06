@@ -90,34 +90,23 @@ public class MainGrafos {
         grafo.reportarAccidente(c7, "Grave");
 
         System.out.println("\nEl sistema recalculó automáticamente la mejor ruta.");
+
+
         System.out.println("\n==================================");
         System.out.println("--- SIMULACIÓN DE FLUJO VEHICULAR ---");
         System.out.println("==================================");
-        
+
         Dispositivos.Semaforo semaforoA = new Dispositivos.Semaforo("SEM-A", A);
-        
+
         System.out.println("\n--- LLEGADA DE VEHÍCULOS A LA INTERSECCIÓN A ---");
         A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-1"));
         A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-2"));
         A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-3"));
+        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-4"));
+        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-5"));
 
-        System.out.println("\n--- SEMÁFORO EN ROJO ---");
-        semaforoA.liberarTrafico();
+        semaforoA.cicloAutomatico(2);
 
-        System.out.println("\n--- SEMÁFORO EN VERDE ---");
-        semaforoA.cambiarAVerde();
-        
-        semaforoA.liberarTrafico(); // Sale AUTO-1
-        semaforoA.liberarTrafico(); // Sale AUTO-2
-        
-        System.out.println("\n--- SEMÁFORO VUELVE A ROJO ---");
-        semaforoA.cambiarARojo();
-        semaforoA.liberarTrafico(); // Rebota AUTO-3
-        
-        System.out.println("\n--- SEMÁFORO VUELVE A VERDE ---");
-        semaforoA.cambiarAVerde();
-        semaforoA.liberarTrafico(); // Sale AUTO-3
-        semaforoA.liberarTrafico(); // Vacío
 
     }
 }

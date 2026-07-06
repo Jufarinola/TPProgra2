@@ -24,16 +24,36 @@ public class Semaforo extends Dispositivo implements ISemaforo {
         color = "Rojo";
     }
 
-    public void liberarTrafico() {
-        if (this.color.equals("Verde")) {
-            if (!this.ubicacion.colaEspera.estaVacia()) {
-                Vehiculo liberado = this.ubicacion.colaEspera.desencolar();
-                System.out.println("Semáforo Verde: El vehículo " + liberado.patente + " avanzó y cruzó la intersección " + this.ubicacion.nombre + ".");
-            } else {
-                System.out.println("Semáforo Verde en " + this.ubicacion.nombre + " pero no hay autos esperando.");
+    public void liberarVehiculos(int cantidad) {
+
+        for (int i = 0; i < cantidad; i++) {
+
+            if (ubicacion.colaEspera.estaVacia()) {
+                System.out.println("No hay más vehículos esperando.");
+                return;
             }
-        } else {
-            System.out.println("Semáforo Rojo en " + this.ubicacion.nombre + ": Los vehículos deben esperar.");
+
+            Vehiculo liberado = ubicacion.colaEspera.desencolar();
+
+            System.out.println("Avanzó el vehículo: " + liberado.patente);
+        }
+    }
+
+    public void cicloAutomatico(int ciclos) {
+
+        for (int i = 1; i <= ciclos; i++) {
+
+            System.out.println("\nCICLO " + i);
+
+            cambiarAVerde();
+            System.out.println("Semáforo " + codigo + " en VERDE");
+            liberarVehiculos(3); // pasan 3 autos
+
+            color = "Amarillo";
+            System.out.println("Semáforo " + codigo + " en AMARILLO");
+
+            cambiarARojo();
+            System.out.println("Semáforo " + codigo + " en ROJO");
         }
     }
 }
