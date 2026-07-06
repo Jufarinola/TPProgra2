@@ -111,11 +111,13 @@ public class MainGrafos {
         semaforoA.activar();
         camaraA.activar();
 
-        Vehiculo auto1 = new Vehiculo("AUTO-1",90);
-        Vehiculo auto2 = new Vehiculo("AUTO-2",60);
-        Vehiculo auto3 = new Vehiculo("AUTO-3",54);
-        Vehiculo auto4 = new Vehiculo("AUTO-4",43);
-        Vehiculo auto5 = new Vehiculo("AUTO-5",55);
+        Vehiculo auto1 = new Vehiculo("AUTO-1",90,2);
+        Vehiculo auto2 = new Vehiculo("AUTO-2",60,2);
+        Vehiculo auto3 = new Vehiculo("AUTO-3",54,2);
+        Vehiculo auto4 = new Vehiculo("AUTO-4",43,2);
+        Vehiculo auto5 = new Vehiculo("AUTO-5",55,2);
+        Vehiculo auto6 = new Vehiculo("AMBULANCIA",100,1);
+
 
         System.out.println("\n--- LLEGADA DE VEHÍCULOS A LA INTERSECCIÓN A ---");
         A.llegarVehiculo(auto1);
@@ -123,6 +125,7 @@ public class MainGrafos {
         A.llegarVehiculo(auto3);
         A.llegarVehiculo(auto4);
         A.llegarVehiculo(auto5);
+        A.llegarVehiculo(auto6);
 
         System.out.println();
 

@@ -3,37 +3,42 @@ package FlujoVehicular;
 import Interfaces.IColaVehiculos;
 
 public class ColaVehiculos implements IColaVehiculos {
-    private NodoVehiculo frente;
-    private NodoVehiculo fin;
+    private NodoVehiculo primero;
 
     public ColaVehiculos() {
-        this.frente = null;
-        this.fin = null;
+        this.primero = null;
     }
 
     public void encolar(Vehiculo v) {
         NodoVehiculo nuevo = new NodoVehiculo(v);
-        if (frente == null) {
-            frente = nuevo;
-            fin = nuevo;
-        } else {
-            fin.siguiente = nuevo;
-            fin = nuevo;
+
+        if (estaVacia() || v.prioridad < primero.vehiculo.prioridad){
+            nuevo.siguiente = primero;
+            primero = nuevo;
+        }
+        else {
+            NodoVehiculo aux = primero;
+
+            while (aux.siguiente != null && aux.siguiente.vehiculo.prioridad <= v.prioridad){
+                aux = aux.siguiente;
+            }
+
+            nuevo.siguiente = aux.siguiente;
+            aux.siguiente = nuevo;
         }
     }
 
     public Vehiculo desencolar() {
-        if (frente == null) return null;
+        if (estaVacia()) {
+            return null;
+        }
 
-        Vehiculo v = frente.vehiculo;
-        frente = frente.siguiente;
-
-        if (frente == null) fin = null;
-
+        Vehiculo v = primero.vehiculo;
+        primero = primero.siguiente;
         return v;
     }
 
     public boolean estaVacia() {
-        return frente == null;
+        return primero == null;
     }
 }

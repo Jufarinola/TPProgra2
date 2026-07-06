@@ -22,6 +22,11 @@ public class Camara extends Dispositivo {
             return;
         }
 
+        if (vehiculo.prioridad < 2){
+            System.out.println("Vehiculo " + vehiculo.patente + " permitido circular fuera de los limites");
+            return;
+        }
+
         if (vehiculo.velocidadActual > calle.limiteVelocidad) {
 
             Infraccion infraccion = new Infraccion(
