@@ -3,35 +3,42 @@ package Main;
 import GrafoVial.GrafoVial;
 import GrafoVial.Interseccion;
 import GrafoVial.Calle;
+import Dispositivos.Camara;
+import FlujoVehicular.Vehiculo;
+import Infraccion.GestorInfracciones;
+import Dispositivos.Semaforo;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 
 public class MainGrafos {
 
     public static Interseccion A =
-            new Interseccion("Av la plata y Av independencia");
+            new Interseccion("A");
 
     public static Interseccion B =
-            new Interseccion("Muñis y Av independencia");
+            new Interseccion("B");
 
     public static Interseccion C =
-            new Interseccion("Jose marmol y Av independencia");
+            new Interseccion("C");
 
     public static Interseccion D =
-            new Interseccion("Av la plata y Estados Unidos");
+            new Interseccion("D");
 
     public static Interseccion E =
-            new Interseccion("Muñis y Estados Unidos");
+            new Interseccion("E");
 
     public static Interseccion F =
-            new Interseccion("Jose Marmol y Estados Unidos");
+            new Interseccion("F");
 
     public static Interseccion G =
-            new Interseccion("Av la plata y Carlos Calvo");
+            new Interseccion("G");
 
     public static Interseccion H =
-            new Interseccion("Muñis y Carlos Calvo");
+            new Interseccion("H");
 
     public static Interseccion I =
-            new Interseccion("Jose Marmol y Carlos Calvo");
+            new Interseccion("I");
 
     public static void main(String[] args) {
         GrafoVial grafo = new GrafoVial(10);
@@ -92,21 +99,43 @@ public class MainGrafos {
         System.out.println("\nEl sistema recalculó automáticamente la mejor ruta.");
 
 
-        System.out.println("\n==================================");
-        System.out.println("--- SIMULACIÓN DE FLUJO VEHICULAR ---");
-        System.out.println("==================================");
+        System.out.println("\n======================================================");
+        System.out.println("--- SIMULACIÓN DE FLUJO VEHICULAR Y INFRACCIONES ---");
+        System.out.println("======================================================");
 
-        Dispositivos.Semaforo semaforoA = new Dispositivos.Semaforo("SEM-A", A);
+        GestorInfracciones gestorInfracciones = new GestorInfracciones();
+
+        Semaforo semaforoA = new Semaforo("S001", A);
+        Camara camaraA = new Camara("CAM001", A);
+
+        semaforoA.activar();
+        camaraA.activar();
+
+        Vehiculo auto1 = new Vehiculo("AUTO-1",90);
+        Vehiculo auto2 = new Vehiculo("AUTO-2",60);
+        Vehiculo auto3 = new Vehiculo("AUTO-3",54);
+        Vehiculo auto4 = new Vehiculo("AUTO-4",43);
+        Vehiculo auto5 = new Vehiculo("AUTO-5",55);
 
         System.out.println("\n--- LLEGADA DE VEHÍCULOS A LA INTERSECCIÓN A ---");
-        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-1"));
-        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-2"));
-        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-3"));
-        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-4"));
-        A.llegarVehiculo(new FlujoVehicular.Vehiculo("AUTO-5"));
+        A.llegarVehiculo(auto1);
+        A.llegarVehiculo(auto2);
+        A.llegarVehiculo(auto3);
+        A.llegarVehiculo(auto4);
+        A.llegarVehiculo(auto5);
 
-        semaforoA.cicloAutomatico(2);
+        System.out.println();
 
+        semaforoA.cambiarAVerde();
 
+        semaforoA.liberarTrafico(c1, camaraA, gestorInfracciones);
+        semaforoA.liberarTrafico(c1, camaraA, gestorInfracciones);
+        semaforoA.liberarTrafico(c1, camaraA, gestorInfracciones);
+
+        System.out.println("\n--- VEHÍCULOS EN CALLE ---");
+        c1.mostrarVehiculosEnCalle();
+
+        System.out.println("\n--- INFRACCIONES REGISTRADAS ---");
+        gestorInfracciones.mostrarInfracciones();
     }
 }
