@@ -1,5 +1,6 @@
 package Accidentes;
 
+import reportes.RegistroEventos;
 import Interfaces.IGestorAccidentes;
 
 public class GestorAccidentes implements IGestorAccidentes {
@@ -24,6 +25,13 @@ public class GestorAccidentes implements IGestorAccidentes {
     public void reportarAccidente(int posOrigen, int posDestino, String gravedad){
         matrizAccidentes[posOrigen][posDestino] = new Accidente(gravedad);
         matrizAccidentes[posOrigen][posDestino].mostrarAccidente();
+
+        RegistroEventos.registrar(
+                "ACCIDENTE",
+                "Se reportó un accidente de gravedad " + gravedad,
+                matrizAccidentes[posOrigen][posDestino]
+        );
+
     }
 
     public void resolverAccidente(int posOrigen, int posDestino) {

@@ -1,4 +1,5 @@
 package Infraccion;
+import reportes.RegistroEventos;
 
 public class GestorInfracciones {
     private NodoInfraccion primero;
@@ -21,6 +22,12 @@ public class GestorInfracciones {
 
             aux.siguiente = nuevo;
         }
+
+        RegistroEventos.registrar(
+                "INFRACCIÓN",
+                "Se registró una infracción de " + infraccion.motivo + " en " + infraccion.calle,
+                infraccion
+        );
 
         System.out.println("Infracción registrada correctamente.");
     }

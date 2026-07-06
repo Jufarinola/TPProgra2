@@ -7,6 +7,7 @@ import Dispositivos.Camara;
 import FlujoVehicular.Vehiculo;
 import Infraccion.GestorInfracciones;
 import Dispositivos.Semaforo;
+import reportes.RegistroEventos;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
@@ -140,5 +141,14 @@ public class MainGrafos {
 
         System.out.println("\n--- INFRACCIONES REGISTRADAS ---");
         gestorInfracciones.mostrarInfracciones();
+
+        System.out.println("\n================");
+        System.out.println("--- Reportes ---");
+        System.out.println("=================");
+
+        System.out.println();
+
+        RegistroEventos.mostrarEventos();
+
     }
 }
