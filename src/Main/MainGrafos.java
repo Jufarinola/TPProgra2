@@ -73,20 +73,23 @@ public class MainGrafos {
         grafo.insertarCalle(c11);
         grafo.insertarCalle(c12);
 
-        grafo.mostrarMatriz();
+        System.out.println("==================================");
+        System.out.println("INICIO DEL VIAJE");
+        System.out.println("==================================");
 
-        System.out.println("--- RUTA NORMAL ---");
-        grafo.dijkstraTiempo(A, I);
+        grafo.iniciarViaje(A, H);
 
-        System.out.println("\n--- OCURRE UN ACCIDENTE EN AV LA PLATA ---");
-        grafo.reportarAccidente(c3, "Grave"); 
+        // ===============================
+        // OCURRE UN ACCIDENTE
+        // ===============================
 
-        System.out.println("\n--- RUTA CON ACCIDENTE ---");
-        grafo.dijkstraTiempo(A, I);
+        System.out.println("\n==================================");
+        System.out.println("ACCIDENTE EN LA RUTA");
+        System.out.println("==================================");
 
-        System.out.println("\n--- ACCIDENTE RESUELTO ---");
-        grafo.resolverAccidente(c3);
-        grafo.dijkstraTiempo(A, I);
+        grafo.reportarAccidente(c7, "Grave");
+
+        System.out.println("\nEl sistema recalculó automáticamente la mejor ruta.");
         System.out.println("\n==================================");
         System.out.println("--- SIMULACIÓN DE FLUJO VEHICULAR ---");
         System.out.println("==================================");

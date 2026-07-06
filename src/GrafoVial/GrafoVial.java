@@ -10,6 +10,9 @@ public class GrafoVial implements IGrafoVial {
     Calle[][] matriz;
     int cantidad;
     int capacidad;
+    Interseccion origenActivo;
+    Interseccion destinoActivo;
+    boolean viajeActivo;
     public GestorAccidentes gestorAccidentes;
 
     public GrafoVial(int capacidad){
@@ -211,8 +214,17 @@ public class GrafoVial implements IGrafoVial {
     public void reportarAccidente(Calle calle, String gravedad) {
         int posOrigen = obtenerIndice(calle.origen);
         int posDestino = obtenerIndice(calle.destino);
+
         if (posOrigen != -1 && posDestino != -1 && existeCalle(calle)) {
+
             gestorAccidentes.reportarAccidente(posOrigen, posDestino, gravedad);
+
+            if (viajeActivo) {
+                System.out.println("Accidente detectado durante el viaje.");
+                System.out.println("Recalculando ruta automáticamente...");
+                dijkstraTiempo(origenActivo, destinoActivo);
+            }
+
         } else {
             System.out.println("Error: No se encontró la calle para reportar el accidente.");
         }
@@ -224,6 +236,15 @@ public class GrafoVial implements IGrafoVial {
         if (posOrigen != -1 && posDestino != -1) {
             gestorAccidentes.resolverAccidente(posOrigen, posDestino);
         }
+    }
+
+    public void iniciarViaje(Interseccion origen, Interseccion destino) {
+        this.origenActivo = origen;
+        this.destinoActivo = destino;
+        this.viajeActivo = true;
+
+        System.out.println("Ruta inicial:");
+        dijkstraTiempo(origenActivo, destinoActivo);
     }
 
     public void mostrarCamino(int[] anterior, int destino){
@@ -246,18 +267,4 @@ public class GrafoVial implements IGrafoVial {
         }
     }
 
-    public void mostrarMatriz(){
-        System.out.println("MATRIZ DE ADYACENCIA");
-
-        for(int i = 0; i < cantidad; i++){
-            for(int j = 0; j < cantidad; j++){
-                if(matriz[i][j] != null){
-                    System.out.print("1 ");
-                } else {
-                    System.out.print("0 ");
-                }
-            }
-            System.out.println();
-        }
-    }
 }

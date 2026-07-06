@@ -16,6 +16,6 @@ public interface IGrafoVial {
     void reportarAccidente(Calle calle, String gravedad);
     void resolverAccidente(Calle calle);
     void mostrarCamino(int[] anterior, int destino);
-    void mostrarMatriz();
+    void iniciarViaje(Interseccion origen, Interseccion destino);
 
 }
