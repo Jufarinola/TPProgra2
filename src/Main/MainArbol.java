@@ -84,14 +84,15 @@ public class MainArbol {
         arbol.buscarBarrio("boedo");
 
 
-        //Mostrar barrios de zonas
-        arbol.mostrarBarriosDeZona("Capital Federal");
-        System.out.println();
+        arbol.registrarAccidente("Manzana 1");
+        arbol.registrarInfraccion("Manzana 1");
+        arbol.registrarVehiculos("Manzana 1", 6);
 
-        //Eliminar un barrio
-        arbol.eliminarBarrio("Boedo","Capital Federal");
-        System.out.println();
-        arbol.mostrarArbol();
+        System.out.println("\n--- CRITICIDAD DEL ÁRBOL ---");
+        arbol.mostrarCriticidad();
+
+        System.out.println("\n--- BARRIO MÁS CRÍTICO ---");
+        arbol.mostrarNodoMasCritico();
 
     }
 }
