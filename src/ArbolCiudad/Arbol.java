@@ -1,10 +1,13 @@
 package ArbolCiudad;
 
 
+import Accidentes.Accidente;
 import Interfaces.IArbol;
+import reportes.EventosSistema;
+import GrafoVial.Calle;
 
 public class Arbol implements IArbol {
-    private NodoArbol raiz;
+    private static NodoArbol raiz;
     private int cant;  //HOLA!!
 
     public Arbol(){
@@ -152,7 +155,7 @@ public class Arbol implements IArbol {
     }
 
 
-    public NodoArbol buscarManzana(String nombre) {
+    public static NodoArbol buscarManzana(String nombre) {
         if (raiz == null) {
             return null;
         }
@@ -178,56 +181,91 @@ public class Arbol implements IArbol {
         return null;
     }
 
-
-    public void registrarAccidente(String nombreManzana) {
+    public static void registrarEventoEnManzana(String nombreManzana, EventosSistema evento) {
         NodoArbol nodo = buscarManzana(nombreManzana);
 
         if (nodo == null) {
-            System.out.println("No se encontró el nodo: " + nombreManzana);
+            System.out.println("No se encontró la manzana: " + nombreManzana);
             return;
         }
 
-        nodo.cantidadAccidentes++;
+        nodo.eventos.apilar(evento);
+
+        if (evento.tipo.equalsIgnoreCase("ACCIDENTE")) {
+            nodo.cantidadAccidentes++;
+        } else if (evento.tipo.equalsIgnoreCase("INFRACCION")) {
+            nodo.cantidadInfracciones++;
+        } else if (evento.tipo.equalsIgnoreCase("VEHÍCULO")) {
+            nodo.cantidadVehiculos++;
+        }
+
         actualizarCriticidadDesdeManzanas();
 
-        System.out.println("Accidente registrado en " + nodo.nombre);
+        System.out.println("Evento registrado en la manzana: " + nombreManzana);
     }
 
-    public void registrarInfraccion(String nombreManzana) {
-        NodoArbol nodo = buscarManzana(nombreManzana);
+    public static void registrarEventoPorCalle(Calle calle, EventosSistema evento) {
+        NodoArbol nodo = buscarManzanaPorCalle(calle);
 
         if (nodo == null) {
-            System.out.println("No se encontró el nodo: " + nombreManzana);
+            System.out.println("No se encontró una manzana para la calle: " + calle.nombre);
             return;
         }
 
-        nodo.cantidadInfracciones++;
-        actualizarCriticidadDesdeManzanas();
-
-        System.out.println("Infracción registrada en " + nodo.nombre);
+        registrarEventoEnManzana(nodo.nombre, evento);
     }
 
-    public void registrarVehiculos(String nombreManzana, int cantidad) {
-        NodoArbol nodo = buscarManzana(nombreManzana);
-
-        if (nodo == null) {
-            System.out.println("No se encontró el nodo: " + nombreManzana);
-            return;
-        }
-
-        nodo.cantidadVehiculos += cantidad;
-        actualizarCriticidadDesdeManzanas();
-
-        System.out.println("Vehículos registrados en " + nodo.nombre);
-    }
-
-    public void mostrarCriticidad(String nombreManzana) {
+    public static NodoArbol buscarManzanaPorCalle(Calle calle) {
         if (raiz == null) {
-            System.out.println("El árbol está vacío");
+            return null;
+        }
+
+        NodoArbol zona = raiz.primerHijo;
+        while (zona != null) {
+            NodoArbol barrio = zona.primerHijo;
+
+            while (barrio != null) {
+                NodoArbol manzana = barrio.primerHijo;
+
+                while (manzana != null) {
+                    if (manzana.manzana != null) {
+
+                        boolean contieneOrigen =
+                                manzana.manzana.esquina1 == calle.origen ||
+                                        manzana.manzana.esquina2 == calle.origen ||
+                                        manzana.manzana.esquina3 == calle.origen ||
+                                        manzana.manzana.esquina4 == calle.origen;
+
+                        boolean contieneDestino =
+                                manzana.manzana.esquina1 == calle.destino ||
+                                        manzana.manzana.esquina2 == calle.destino ||
+                                        manzana.manzana.esquina3 == calle.destino ||
+                                        manzana.manzana.esquina4 == calle.destino;
+
+                        if (contieneOrigen && contieneDestino) {
+                            return manzana;
+                        }
+                    }
+                    manzana = manzana.siguienteHermano;
+                }
+                barrio = barrio.siguienteHermano;
+            }
+            zona = zona.siguienteHermano;
+        }
+
+        return null;
+    }
+
+    public void mostrarEventosDeManzana(String nombreManzana) {
+        NodoArbol nodo = buscarManzana(nombreManzana);
+
+        if (nodo == null) {
+            System.out.println("No se encontró la manzana: " + nombreManzana);
             return;
         }
 
-        mostrarCriticidad();
+        System.out.println("Eventos de la manzana: " + nombreManzana);
+        nodo.eventos.mostrarPila();
     }
 
     public void mostrarCriticidad() {
@@ -258,12 +296,11 @@ public class Arbol implements IArbol {
         System.out.println(tipo + ": " + nodo.nombre);
         System.out.println("Accidentes: " + nodo.cantidadAccidentes);
         System.out.println("Infracciones: " + nodo.cantidadInfracciones);
-        System.out.println("Vehiculos: " + nodo.cantidadVehiculos);
         System.out.println("Puntaje: " + nodo.puntajeCriticidad);
         System.out.println("-------------------------");
     }
 
-    private void actualizarCriticidadDesdeManzanas() {
+    private static void actualizarCriticidadDesdeManzanas() {
         if (raiz == null) {
             return;
         }
@@ -271,7 +308,7 @@ public class Arbol implements IArbol {
         actualizarCriticidadRecursivo(raiz);
     }
 
-    private void actualizarCriticidadRecursivo(NodoArbol nodo) {
+    private static void actualizarCriticidadRecursivo(NodoArbol nodo) {
         if (nodo == null) {
             return;
         }

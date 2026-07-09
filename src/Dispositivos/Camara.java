@@ -36,7 +36,7 @@ public class Camara extends Dispositivo {
                     50000
             );
 
-            gestor.registrarInfraccion(infraccion);
+            gestor.registrarInfraccion(infraccion, calle);
 
         } else {
             System.out.println("Vehículo " + vehiculo.patente + " dentro del límite permitido.");

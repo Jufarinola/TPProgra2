@@ -3,7 +3,10 @@ package GrafoVial;
 import Accidentes.GestorAccidentes;
 import FlujoVehicular.Vehiculo;
 import Interfaces.IGrafoVial;
-import FlujoVehicular.ColaVehiculos;
+import ArbolCiudad.Arbol;
+import reportes.EventosSistema;
+import reportes.RegistroEventos;
+import Accidentes.Accidente;
 
 import javax.print.DocFlavor;
 
@@ -16,13 +19,15 @@ public class GrafoVial implements IGrafoVial {
     Interseccion destinoActivo;
     boolean viajeActivo;
     public GestorAccidentes gestorAccidentes;
+    Arbol arbol;
 
-    public GrafoVial(int capacidad){
+    public GrafoVial(int capacidad,Arbol arbol){
         this.capacidad = capacidad;
         this.intersecciones = new Interseccion[capacidad];
         this.matriz = new Calle[capacidad][capacidad];
         this.cantidad = 0;
         this.gestorAccidentes = new GestorAccidentes(capacidad);
+        this.arbol = arbol;
     }
 
     public void agregarInterseccion(Interseccion interseccion){
@@ -219,7 +224,15 @@ public class GrafoVial implements IGrafoVial {
 
         if (posOrigen != -1 && posDestino != -1 && existeCalle(calle)) {
 
-            gestorAccidentes.reportarAccidente(posOrigen, posDestino, gravedad);
+            Accidente accidente = gestorAccidentes.reportarAccidente(posOrigen, posDestino, gravedad);
+
+            EventosSistema evento = RegistroEventos.registrar(
+                    "ACCIDENTE",
+                    "Accidente en " + calle.nombre + " " + calle.altura,
+                    accidente
+            );
+
+            arbol.registrarEventoEnManzana("Manzana 2", evento);
 
             if (viajeActivo) {
                 System.out.println("Accidente detectado durante el viaje.");

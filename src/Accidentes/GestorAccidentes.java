@@ -22,9 +22,11 @@ public class GestorAccidentes implements IGestorAccidentes {
         return 0.0;
     }
 
-    public void reportarAccidente(int posOrigen, int posDestino, String gravedad){
-        matrizAccidentes[posOrigen][posDestino] = new Accidente(gravedad);
-        matrizAccidentes[posOrigen][posDestino].mostrarAccidente();
+    public Accidente reportarAccidente(int posOrigen, int posDestino, String gravedad){
+        Accidente accidente = new Accidente(gravedad);
+
+        matrizAccidentes[posOrigen][posDestino] = accidente;
+        accidente.mostrarAccidente();
 
         RegistroEventos.registrar(
                 "ACCIDENTE",
@@ -32,6 +34,7 @@ public class GestorAccidentes implements IGestorAccidentes {
                 matrizAccidentes[posOrigen][posDestino]
         );
 
+        return accidente;
     }
 
     public void resolverAccidente(int posOrigen, int posDestino) {

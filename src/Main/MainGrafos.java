@@ -8,6 +8,10 @@ import FlujoVehicular.Vehiculo;
 import Infraccion.GestorInfracciones;
 import Dispositivos.Semaforo;
 import reportes.RegistroEventos;
+import ArbolCiudad.Arbol;
+import ArbolCiudad.Manzana;
+import ArbolCiudad.NodoArbol;
+import reportes.EventosSistema;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
@@ -42,7 +46,28 @@ public class MainGrafos {
             new Interseccion("I");
 
     public static void main(String[] args) {
-        GrafoVial grafo = new GrafoVial(10);
+        Arbol arbol = new Arbol();
+        GrafoVial grafo = new GrafoVial(10, arbol);
+
+        NodoArbol ciudad = new NodoArbol("Buenos Aires");
+        arbol.agregarRaiz(ciudad);
+
+        NodoArbol zonaCentro = new NodoArbol("Zona Centro");
+        arbol.agregarHijo(ciudad, zonaCentro);
+
+        NodoArbol barrioBoedo = new NodoArbol("Boedo");
+        arbol.agregarHijo(zonaCentro, barrioBoedo);
+
+        Manzana m1 = new Manzana("Manzana 1", A, B, D, E);
+        Manzana m2 = new Manzana("Manzana 2", B, C, E, F);
+        Manzana m3 = new Manzana("Manzana 3", D, E, G, H);
+        Manzana m4 = new Manzana("Manzana 4", E, F, H, I);
+
+        arbol.agregarHijo(barrioBoedo, new NodoArbol(m1));
+        arbol.agregarHijo(barrioBoedo, new NodoArbol(m2));
+        arbol.agregarHijo(barrioBoedo, new NodoArbol(m3));
+        arbol.agregarHijo(barrioBoedo, new NodoArbol(m4));
+
 
         grafo.agregarInterseccion(A);
         grafo.agregarInterseccion(B);
@@ -150,6 +175,14 @@ public class MainGrafos {
         System.out.println();
 
         RegistroEventos.mostrarEventos();
+
+        System.out.println();
+        arbol.mostrarEventosDeManzana("Manzana 1");
+        System.out.println();
+        arbol.mostrarCriticidad();
+        System.out.println();
+
+
 
     }
 }

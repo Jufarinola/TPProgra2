@@ -1,5 +1,9 @@
 package Infraccion;
+import ArbolCiudad.Arbol;
+import Dispositivos.Camara;
+import reportes.EventosSistema;
 import reportes.RegistroEventos;
+import GrafoVial.Calle;
 
 public class GestorInfracciones {
     private NodoInfraccion primero;
@@ -8,7 +12,7 @@ public class GestorInfracciones {
         this.primero = null;
     }
 
-    public void registrarInfraccion(Infraccion infraccion) {
+    public void registrarInfraccion(Infraccion infraccion, Calle calle) {
         NodoInfraccion nuevo = new NodoInfraccion(infraccion);
 
         if (primero == null) {
@@ -23,11 +27,13 @@ public class GestorInfracciones {
             aux.siguiente = nuevo;
         }
 
-        RegistroEventos.registrar(
-                "INFRACCIÓN",
+        EventosSistema evento = RegistroEventos.registrar(
+                "INFRACCION",
                 "Se registró una infracción de " + infraccion.motivo + " en " + infraccion.calle,
                 infraccion
         );
+
+        Arbol.registrarEventoPorCalle(calle, evento);
 
         System.out.println("Infracción registrada correctamente.");
     }
@@ -42,7 +48,7 @@ public class GestorInfracciones {
         int contador = 1;
 
         while (aux != null) {
-            System.out.println("\nINFRACCIÓN " + contador);
+            System.out.println("\nINFRACCION " + contador);
             aux.dato.mostrarInfraccion();
 
             aux = aux.siguiente;

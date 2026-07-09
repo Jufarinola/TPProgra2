@@ -7,8 +7,8 @@ public class Calle {
     public String nombre;
     int altura;
 
-    Interseccion origen;
-    Interseccion destino;
+    public Interseccion origen;
+    public Interseccion destino;
 
     int distancia;
     public int limiteVelocidad;
