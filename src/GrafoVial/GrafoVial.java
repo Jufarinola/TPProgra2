@@ -1,7 +1,9 @@
 package GrafoVial;
 
 import Accidentes.GestorAccidentes;
+import FlujoVehicular.Vehiculo;
 import Interfaces.IGrafoVial;
+import FlujoVehicular.ColaVehiculos;
 
 import javax.print.DocFlavor;
 
@@ -230,10 +232,14 @@ public class GrafoVial implements IGrafoVial {
         }
     }
 
-    public void resolverAccidente(Calle calle) {
+    public void resolverAccidente(Calle calle, Interseccion hospital) {
         int posOrigen = obtenerIndice(calle.origen);
         int posDestino = obtenerIndice(calle.destino);
         if (posOrigen != -1 && posDestino != -1) {
+            Vehiculo ambulacia = new Vehiculo("Ambulancia", 100, 1);
+            dijkstraTiempo(hospital, calle.destino);
+            calle.agregarVehiculoEnCalle(ambulacia);
+            calle.destino.llegarVehiculo(ambulacia);
             gestorAccidentes.resolverAccidente(posOrigen, posDestino);
         }
     }

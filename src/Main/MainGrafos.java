@@ -97,7 +97,11 @@ public class MainGrafos {
 
         grafo.reportarAccidente(c7, "Grave");
 
-        System.out.println("\nEl sistema recalculó automáticamente la mejor ruta.");
+        System.out.println("\nEl sistema contacta con emergencias.");
+
+        System.out.println();
+        grafo.resolverAccidente(c7,I);
+
 
 
         System.out.println("\n======================================================");
@@ -117,8 +121,6 @@ public class MainGrafos {
         Vehiculo auto3 = new Vehiculo("AUTO-3",54,2);
         Vehiculo auto4 = new Vehiculo("AUTO-4",43,2);
         Vehiculo auto5 = new Vehiculo("AUTO-5",55,2);
-        Vehiculo auto6 = new Vehiculo("AMBULANCIA",100,1);
-
 
         System.out.println("\n--- LLEGADA DE VEHÍCULOS A LA INTERSECCIÓN A ---");
         A.llegarVehiculo(auto1);
@@ -126,7 +128,6 @@ public class MainGrafos {
         A.llegarVehiculo(auto3);
         A.llegarVehiculo(auto4);
         A.llegarVehiculo(auto5);
-        A.llegarVehiculo(auto6);
 
         System.out.println();
 

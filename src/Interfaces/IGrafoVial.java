@@ -14,7 +14,7 @@ public interface IGrafoVial {
     int buscarMenorTiempo(double[] tiempo, boolean[] visitado);
     void dijkstraTiempo(Interseccion origen, Interseccion destino);
     void reportarAccidente(Calle calle, String gravedad);
-    void resolverAccidente(Calle calle);
+    void resolverAccidente(Calle calle, Interseccion ambulancia);
     void mostrarCamino(int[] anterior, int destino);
     void iniciarViaje(Interseccion origen, Interseccion destino);
 
