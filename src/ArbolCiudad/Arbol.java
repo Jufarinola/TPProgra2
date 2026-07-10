@@ -334,22 +334,6 @@ public class Arbol implements IArbol {
         nodo.calcularPuntajeCriticidad();
     }
 
-    private void mostrarCriticidadRecursivo(NodoArbol nodo) {
-        if (nodo == null) {
-            return;
-        }
-
-        System.out.println("Nodo: " + nodo.nombre);
-        System.out.println("Accidentes: " + nodo.cantidadAccidentes);
-        System.out.println("Infracciones: " + nodo.cantidadInfracciones);
-        System.out.println("Vehículos: " + nodo.cantidadVehiculos);
-        System.out.println("Puntaje: " + nodo.puntajeCriticidad);
-        System.out.println("-------------------------");
-
-        mostrarCriticidadRecursivo(nodo.primerHijo);
-        mostrarCriticidadRecursivo(nodo.siguienteHermano);
-    }
-
     public NodoArbol buscarNodoMasCritico() {
         if (raiz == null) {
             return null;
@@ -388,7 +372,6 @@ public class Arbol implements IArbol {
         System.out.println("Nodo más crítico: " + masCritico.nombre);
         System.out.println("Accidentes: " + masCritico.cantidadAccidentes);
         System.out.println("Infracciones: " + masCritico.cantidadInfracciones);
-        System.out.println("Vehículos: " + masCritico.cantidadVehiculos);
         System.out.println("Puntaje: " + masCritico.puntajeCriticidad);
     }
 

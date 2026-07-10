@@ -52,7 +52,7 @@ public class MainGrafos {
         NodoArbol ciudad = new NodoArbol("Buenos Aires");
         arbol.agregarRaiz(ciudad);
 
-        NodoArbol zonaCentro = new NodoArbol("Zona Centro");
+        NodoArbol zonaCentro = new NodoArbol("Capital Federal");
         arbol.agregarHijo(ciudad, zonaCentro);
 
         NodoArbol barrioBoedo = new NodoArbol("Boedo");
@@ -127,8 +127,6 @@ public class MainGrafos {
         System.out.println();
         grafo.resolverAccidente(c7,I);
 
-
-
         System.out.println("\n======================================================");
         System.out.println("--- SIMULACIÓN DE FLUJO VEHICULAR Y INFRACCIONES ---");
         System.out.println("======================================================");
@@ -145,7 +143,7 @@ public class MainGrafos {
         Vehiculo auto2 = new Vehiculo("AUTO-2",60,2);
         Vehiculo auto3 = new Vehiculo("AUTO-3",54,2);
         Vehiculo auto4 = new Vehiculo("AUTO-4",43,2);
-        Vehiculo auto5 = new Vehiculo("AUTO-5",55,2);
+        Vehiculo auto5 = new Vehiculo("AMBULANCIA",55,1);
 
         System.out.println("\n--- LLEGADA DE VEHÍCULOS A LA INTERSECCIÓN A ---");
         A.llegarVehiculo(auto1);
@@ -176,11 +174,15 @@ public class MainGrafos {
 
         RegistroEventos.mostrarEventos();
 
+
         System.out.println();
-        arbol.mostrarEventosDeManzana("Manzana 1");
+        System.out.println("\n===========================================");
+        System.out.println("--- ZONAS Y BARRIOS CON MAYOR CRITICIDAD ---");
+        System.out.println("===========================================");
         System.out.println();
         arbol.mostrarCriticidad();
         System.out.println();
+        arbol.mostrarNodoMasCritico();
 
 
 

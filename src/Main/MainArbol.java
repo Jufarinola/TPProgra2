@@ -80,19 +80,5 @@ public class MainArbol {
         m1.mostrarManzana();
         System.out.println();
 
-        //Buscar barrio dentro del arbol
-        arbol.buscarBarrio("boedo");
-
-
-        arbol.registrarAccidente("Manzana 1");
-        arbol.registrarInfraccion("Manzana 1");
-        arbol.registrarVehiculos("Manzana 1", 6);
-
-        System.out.println("\n--- CRITICIDAD DEL ÁRBOL ---");
-        arbol.mostrarCriticidad();
-
-        System.out.println("\n--- BARRIO MÁS CRÍTICO ---");
-        arbol.mostrarNodoMasCritico();
-
     }
 }
